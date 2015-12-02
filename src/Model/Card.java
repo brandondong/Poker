@@ -19,4 +19,25 @@ public class Card {
     public Suit getSuit() {
         return suit;
     }
+
+    @Override
+    public String toString() {
+        String suitString = suit.toString();
+        if (!suit.equals(Suit.CLOVER)) {
+            suitString += "S";
+        }
+        String face;
+        if (value == 1) {
+            face = "ACE";
+        } else if (value <= 10) {
+            face = String.valueOf(value);
+        } else if (value == 11) {
+            face = "JACK";
+        } else if (value == 12) {
+            face = "QUEEN";
+        } else {
+            face = "KING";
+        }
+        return face + " OF " + suitString;
+    }
 }

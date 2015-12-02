@@ -20,5 +20,14 @@ public class Game {
         for (String next : names) {
             players.add(new Player(next));
         }
+        initCards();
+    }
+
+    private void initCards() {
+        for (int i = 1; i <= 13; i++) {
+            for (Suit next : Suit.values()) {
+                cards.add(new Card(i, next));
+            }
+        }
     }
 }
