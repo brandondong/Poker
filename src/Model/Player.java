@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Brandon on 2015-11-29.
  */
@@ -8,12 +11,16 @@ public class Player {
 
     private String name;
     private int balance;
-    private Card card1;
-    private Card card2;
+    private List<Card> hand;
 
     public Player(String name) {
         this.name = name;
+        hand = new ArrayList<>();
         balance = STARTING_BALANCE;
+    }
+
+    public void setHand(List<Card> hand) {
+        this.hand = hand;
     }
 
     @Override

@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Scanner;
 
 /**
  * Created by Brandon on 2015-11-30.
@@ -12,44 +12,43 @@ public class Game {
     private Player bigBlind;
     private Player littleBlind;
     private Player current;
-    private Card[] cards;
     private Player end;
+    private Deck deck;
 
-    public Game(List<String> names) {
+    public Game() {
+        System.out.println("Welcome to Texas Hold'em Poker. If you would like to quit at any time, type 'q'");
         players = new ArrayList<>();
-        for (String next : names) {
-            players.add(new Player(next));
-        }
-
-        cards = new Card[52];
-        initCards();
+        initPlayers();
+        deck = new Deck();
+        deck.shuffle();
     }
 
-    private void initCards() {
-        for (int i = 0; i < 52; i++) {
-            cards[i] = new Card(i / 4 + 1, Suit.values()[i % 4]);
-        }
-    }
-
-    public void shuffle() {
-        shuffleHelper(51);
-    }
-
-    private void shuffleHelper(int i) {
-        if (i != 0) {
-            shuffleHelper(i - 1);
-            swap(i, ThreadLocalRandom.current().nextInt(0, i + 1));
+    public void initPlayers() {
+        System.out.print("Enter the number of players: ");
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        for (int i = 0; i < num; i++) {
+            players.add(new Player(inputString("Enter the player name:")));
         }
     }
 
-    private void swap(int i1, int i2) {
-        Card temp = cards[i1];
-        cards[i1] = cards[i2];
-        cards[i2] = temp;
-
+    private String inputString(String prompt) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println(prompt);
+            String s = sc.nextLine();
+            if (s.equals("q")) {
+                System.out.println("Thanks for playing.");
+                System.exit(1);
+            } else if (!s.equals("")) {
+                return s;
+            } else {
+                System.out.println("Invalid input.");
+            }
+        }
     }
 
-    public Card[] getCards() {
-        return cards;
+    public static void main(String[] args) {
+        new Game();
     }
 }
