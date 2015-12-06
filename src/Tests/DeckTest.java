@@ -6,6 +6,8 @@ import Model.Suit;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -21,8 +23,9 @@ public class DeckTest {
 
     @Test
     public void testInit() {
-        assertEquals(test.deal(1).get(0), new Card(1, Suit.DIAMOND));
-        assertEquals(test.deal(51).get(50), new Card(13, Suit.SPADE));
+        List<Card> deck = test.deal(52);
+        assertEquals(deck.size(), 52);
+        assertTrue(deck.contains(new Card(2, Suit.CLOVER)));
         try {
             test.deal(1);
             fail();

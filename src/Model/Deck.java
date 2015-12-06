@@ -14,7 +14,6 @@ public class Deck {
     int index;
 
     public Deck() {
-        index = 0;
         cards = new Card[52];
         initCards();
     }
@@ -23,6 +22,7 @@ public class Deck {
         for (int i = 0; i < SIZE; i++) {
             cards[i] = new Card(i / 4 + 1, Suit.values()[i % 4]);
         }
+        shuffle();
     }
 
     // Takes back all the cards that were dealt and shuffles the deck
