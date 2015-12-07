@@ -22,12 +22,33 @@ public class Game {
         players = new ArrayList<>();
         initPlayers();
         deck = new Deck();
+
+        while (!isOver()) {
+            deck.shuffle();
+        }
     }
 
     public void initPlayers() {
         int num = inputNum("Enter the number of players:", 2, 9);
         for (int i = 0; i < num; i++) {
             players.add(new Player(inputString("Enter the player name:")));
+        }
+    }
+
+    public boolean isOver() {
+        int count = 0;
+        Player winner = null;
+        for (Player next : players) {
+            if (!next.isOver()) {
+                count++;
+                winner = next;
+            }
+        }
+        if (count == 1) {
+            System.out.printf("%s has won the game.", winner.toString());
+            return true;
+        } else {
+            return false;
         }
     }
 

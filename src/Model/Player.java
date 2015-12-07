@@ -23,6 +23,19 @@ public class Player {
         this.hand = hand;
     }
 
+    public int getBalance() {
+        return balance;
+    }
+
+    public boolean isOver() {
+        return balance == 0;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

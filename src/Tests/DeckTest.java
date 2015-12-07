@@ -25,7 +25,8 @@ public class DeckTest {
     public void testInit() {
         List<Card> deck = test.deal(52);
         assertEquals(deck.size(), 52);
-        assertTrue(deck.contains(new Card(2, Suit.CLOVER)));
+        assertEquals(deck.get(0), new Card(1, Suit.DIAMOND));
+        assertEquals(deck.get(51), new Card(13, Suit.SPADE));
         try {
             test.deal(1);
             fail();

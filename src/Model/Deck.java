@@ -16,13 +16,13 @@ public class Deck {
     public Deck() {
         cards = new Card[52];
         initCards();
+        index = 0;
     }
 
     private void initCards() {
         for (int i = 0; i < SIZE; i++) {
             cards[i] = new Card(i / 4 + 1, Suit.values()[i % 4]);
         }
-        shuffle();
     }
 
     // Takes back all the cards that were dealt and shuffles the deck
