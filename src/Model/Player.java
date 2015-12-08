@@ -1,5 +1,7 @@
 package Model;
 
+import Input.UserInput;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +15,8 @@ public class Player {
     private int balance;
     private List<Card> hand;
 
-    public Player(String name) {
-        this.name = name;
+    public Player() {
+        name = UserInput.inputString("Enter the player name:");
         hand = new ArrayList<>();
         balance = STARTING_BALANCE;
     }
