@@ -6,7 +6,6 @@ import java.util.Scanner;
  * Created by Brandon on 2015-12-07.
  */
 public class UserInput {
-    public static final String ERROR_MESSAGE = "Invalid input.";
     public static final String LEAVE_MESSAGE = "Thanks for playing.";
     public static final String EXIT_STRING = "q";
 
@@ -21,7 +20,7 @@ public class UserInput {
             } else if (!s.equals("")) {
                 return s;
             } else {
-                System.out.println(ERROR_MESSAGE);
+                System.out.println("Invalid input: Name cannot be an empty string.");
             }
         }
     }
@@ -37,13 +36,15 @@ public class UserInput {
             }
             try {
                 int i = Integer.valueOf(s);
-                if (i >= low && i <= high) {
-                    return i;
+                if (i > high) {
+                    System.out.printf("Invalid input: Number cannot be greater than %d.\n", high);
+                } else if (i < low) {
+                    System.out.printf("Invalid input: Number cannot be lower than %d.\n", low);
                 } else {
-                    throw new Exception();
+                    return i;
                 }
             } catch (Exception e) {
-                System.out.println(ERROR_MESSAGE);
+                System.out.println("Invalid input: Must be an integer.");
             }
         }
     }

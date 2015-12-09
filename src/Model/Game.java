@@ -10,6 +10,8 @@ import java.util.Scanner;
  * Created by Brandon on 2015-11-30.
  */
 public class Game {
+    public static final int MAX_PLAYERS = 9;
+
     private List<Player> players;
     private Player bigBlind;
     private Player littleBlind;
@@ -18,7 +20,7 @@ public class Game {
     private Deck deck;
 
     public Game() {
-        System.out.println("Welcome to Texas Hold'em Poker. If you would like to quit at any time, type 'q'");
+        System.out.printf("Welcome to Texas Hold'em Poker. If you would like to quit at any time, type '%s'.\n", UserInput.EXIT_STRING);
         players = new ArrayList<>();
         initPlayers();
         deck = new Deck();
@@ -36,7 +38,7 @@ public class Game {
     }
 
     private void initPlayers() {
-        int num = UserInput.inputNum("Enter the number of players:", 2, 9);
+        int num = UserInput.inputNum("Enter the number of players:", 2, MAX_PLAYERS);
         for (int i = 0; i < num; i++) {
             players.add(new Player());
         }
