@@ -13,10 +13,10 @@ public class Game {
     public static final int MAX_PLAYERS = 9;
 
     private List<Player> players;
-    private Player bigBlind;
-    private Player littleBlind;
-    private Player current;
-    private Player end;
+    private int bigBlind;
+    private int smallBlind;
+    private int current;
+    private int end;
     private Deck deck;
 
     public Game() {
@@ -24,10 +24,12 @@ public class Game {
         players = new ArrayList<>();
         initPlayers();
         deck = new Deck();
+        initBlinds();
 
         while (!isOver()) {
             deck.shuffle();
             dealHands();
+            nextBlinds();
         }
     }
 
@@ -42,6 +44,33 @@ public class Game {
         for (int i = 0; i < num; i++) {
             players.add(new Player());
         }
+    }
+
+    private void initBlinds() {
+        bigBlind = players.size() - 1;
+        smallBlind = bigBlind - 1;
+        current = 0;
+        end = current;
+    }
+
+    private void nextBlinds() {
+        while (true) {
+            bigBlind = (bigBlind + 1) % players.size();
+            if (!players.get(bigBlind).isOver()) {
+                break;
+            }
+        }
+        while (true) {
+            smallBlind = (smallBlind + 1) % players.size();
+            if (!players.get(smallBlind).isOver()) {
+                break;
+            }
+        }
+        current = (bigBlind + 1) % players.size();
+        while (players.get(current).isOver()) {
+            current = (current + 1) % players.size();
+        }
+        end = current;
     }
 
     public boolean isOver() {
