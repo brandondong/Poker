@@ -18,6 +18,8 @@ public class Game {
     private int current;
     private int end;
     private Deck deck;
+    private int pot;
+    private List<Card> flop;
 
     public Game() {
         System.out.printf("Welcome to Texas Hold'em Poker. If you would like to quit at any time, type '%s'.\n", UserInput.EXIT_STRING);
@@ -29,8 +31,31 @@ public class Game {
         while (!isOver()) {
             deck.shuffle();
             dealHands();
+            pot = 0;
+            runRound();
             nextBlinds();
         }
+    }
+
+    private void runRound() {
+        flop = new ArrayList<>();
+        for (Round next : Round.values()) {
+            if (next.equals(Round.FLOP)) {
+                flop.addAll(deck.deal(3));
+            } else if (next.equals(Round.TURN) || next.equals(Round.RIVER)) {
+                flop.addAll(deck.deal(1));
+            }
+            runBetting();
+            findWinner();
+        }
+    }
+
+    private void runBetting() {
+
+    }
+
+    private void findWinner() {
+
     }
 
     private void dealHands() {
@@ -66,11 +91,18 @@ public class Game {
                 break;
             }
         }
-        current = (bigBlind + 1) % players.size();
-        while (players.get(current).isOver()) {
-            current = (current + 1) % players.size();
-        }
+        current = bigBlind;
+        nextCurrent();
         end = current;
+    }
+
+    private void nextCurrent() {
+        while (true) {
+            current = (current + 1) % players.size();
+            if (!players.get(current).isOver()) {
+                return;
+            }
+        }
     }
 
     public boolean isOver() {

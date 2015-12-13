@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * Created by Brandon on 2015-11-29.
  */
@@ -18,6 +20,24 @@ public class Card {
 
     public Suit getSuit() {
         return suit;
+    }
+
+    public static int scoreHand(List<Card> flop, List<Card> hand) {
+        Card c1;
+        Card c2;
+        if (hand.get(0).getValue() > hand.get(1).getValue()) {
+            c1 = hand.get(0);
+            c2 = hand.get(1);
+        } else {
+            c1 = hand.get(1);
+            c2 = hand.get(0);
+        }
+
+        if (false) {
+            return 1;
+        } else {
+            return c1.getValue() * 100 + c2.getValue();
+        }
     }
 
     @Override
