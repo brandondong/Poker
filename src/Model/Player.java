@@ -33,6 +33,10 @@ public class Player {
         return balance == 0;
     }
 
+    public void bet() {
+        System.out.println();
+    }
+
     @Override
     public String toString() {
         return name;

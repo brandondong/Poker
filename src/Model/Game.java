@@ -51,7 +51,13 @@ public class Game {
     }
 
     private void runBetting() {
-
+        while (true) {
+            players.get(current).bet();
+            nextCurrent();
+            if (current == end) {
+                return;
+            }
+        }
     }
 
     private void findWinner() {
