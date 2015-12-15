@@ -27,14 +27,14 @@ public class Game {
         initPlayers();
         deck = new Deck();
         initBlinds();
+    }
 
-        while (!isOver()) {
-            deck.shuffle();
-            dealHands();
-            pot = 0;
-            runRound();
-            nextBlinds();
-        }
+    public void handleRound() {
+        deck.shuffle();
+        dealHands();
+        pot = 0;
+        runRound();
+        nextBlinds();
     }
 
     private void runRound() {
@@ -126,9 +126,5 @@ public class Game {
         } else {
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-        new Game();
     }
 }
