@@ -40,6 +40,26 @@ public class Card {
         }
     }
 
+    private static int matchPairs(List<Card> flop, Card c) {
+        int count = 0;
+        for (Card next : flop) {
+            if (c.getValue() == next.getValue()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static int matchSuit(List<Card> flop, Card c) {
+        int count = 0;
+        for (Card next : flop) {
+            if (c.getSuit() == next.getSuit()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     @Override
     public String toString() {
         String suitString = suit.toString();
