@@ -33,8 +33,11 @@ public class Player {
         return balance == 0;
     }
 
-    public void bet() {
-        System.out.println();
+    public int bet(int pot, List<Card> flop) {
+        for (Card next : flop) {
+            System.out.println(next);
+        }
+        return 0;
     }
 
     @Override

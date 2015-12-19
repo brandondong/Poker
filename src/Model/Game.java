@@ -32,12 +32,12 @@ public class Game {
     public void handleRound() {
         deck.shuffle();
         dealHands();
-        pot = 0;
         runRound();
         nextBlinds();
     }
 
     private void runRound() {
+        pot = 0;
         flop = new ArrayList<>();
         for (Round next : Round.values()) {
             if (next.equals(Round.FLOP)) {
@@ -52,7 +52,7 @@ public class Game {
 
     private void runBetting() {
         while (true) {
-            players.get(current).bet();
+            pot = players.get(current).bet(pot, flop);
             nextCurrent();
             if (current == end) {
                 return;
