@@ -35,7 +35,12 @@ public class Card {
 
         if (false) {
             return 1;
-        } else {
+        } else if (matchPairs(flop, c1) == 2) {
+            return c1.getValue() * 1000 + c2.getValue();
+        } else if (matchPairs(flop, c2) == 2) {
+            return c2.getValue() * 1000 + c1.getValue();
+        }
+        else {
             return c1.getValue() * 100 + c2.getValue();
         }
     }
